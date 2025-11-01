@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Segmentation Project Plots</title>
+</head>
+<body>
+    <h1>Customer Segmentation Plots</h1>
+    {% for img in images %}
+        <div style="margin-bottom:20px;">
+            <h3>{{ img }}</h3>
+            <img src="{{ url_for('plots', filename=img) }}" 
+                 alt="{{ img }}" 
+                 style="max-width:600px; border:1px solid #ccc;">
+        </div>
+    {% endfor %}
+</body>
+</html>

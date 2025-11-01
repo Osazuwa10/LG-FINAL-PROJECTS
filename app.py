@@ -1,37 +1,24 @@
-from flask import Flask, request, jsonify
-import joblib
-import numpy as np
+import os
+from flask import Flask, render_template, send_from_directory
 
 app = Flask(__name__)
 
-# Load model
-model_data = joblib.load("model/segmentation_model.pkl")
-kmeans = model_data['kmeans']
-scaler = model_data['scaler']
-features = model_data['features']
-labels = model_data['labels']
+# Route to display all plots
 
 
-@app.route("/", methods=["GET"])
+@app.route("/")
 def home():
-    return jsonify({"message": "Welcome to LG Customer Segmentation API – model is live!"})
+    # Look inside the "plots" folder and grab all .png files
+    plot_dir = "plots"
+    images = [f for f in os.listdir(plot_dir) if f.endswith(".png")]
+    return render_template("index.html", images=images)
+
+# Route to serve images from the plots folder
 
 
-@app.route("/predict", methods=["POST"])
-def predict():
-    data = request.get_json()
-    input_data = [data.get(f, 0) for f in features]
-    features_array = np.array([input_data])
-    scaled = scaler.transform(features_array)
-    prediction = kmeans.predict(scaled)[0]
-    segment_label = labels[prediction]
-    confidence = np.max(kmeans.predict_proba(scaled)) if hasattr(
-        kmeans, 'predict_proba') else 1.0
-    return jsonify({
-        "segment_id": int(prediction),
-        "segment": segment_label,
-        "confidence": float(confidence)
-    })
+@app.route("/plots/<path:filename>")
+def plots(filename):
+    return send_from_directory("plots", filename)
 
 
 if __name__ == "__main__":
