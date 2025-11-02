@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 import pandas as pd
 import matplotlib
-matplotlib.use("Agg")   # ✅ Use non-GUI backend (no Tkinter errors)
+matplotlib.use("Agg")   # ✅ Use non-GUI backend (avoids Tkinter errors)
 
 
 def load_data(path):
@@ -39,7 +39,7 @@ def run_clustering(df, n_clusters, plots_dir):
     X_scaled = scaler.fit_transform(X)
 
     # Run clustering
-    model = KMeans(n_clusters=n_clusters, random_state=42)
+    model = KMeans(n_clusters=n_clusters, random_state=42, n_init=10)
     df["Cluster"] = model.fit_predict(X_scaled)
 
     # Save scatter plot
@@ -61,6 +61,19 @@ def run_clustering(df, n_clusters, plots_dir):
         "Annual_Income": "mean",
         "Spending_Score": "mean"
     }).reset_index()
+
+    # ✅ Round values for readability
+    cluster_summary = cluster_summary.round({
+        "Age": 1,              # 1 decimal place
+        "Annual_Income": 0,    # whole numbers
+        "Spending_Score": 0    # whole numbers
+    })
+
+    # ✅ Format numbers with commas for presentation
+    cluster_summary["Annual_Income"] = cluster_summary["Annual_Income"].map(
+        lambda x: f"{int(x):,}")
+    cluster_summary["Spending_Score"] = cluster_summary["Spending_Score"].map(
+        lambda x: f"{int(x):,}")
 
     summary_path = os.path.join(plots_dir, "cluster_summary.csv")
     cluster_summary.to_csv(summary_path, index=False)

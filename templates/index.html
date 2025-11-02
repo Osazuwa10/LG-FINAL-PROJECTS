@@ -26,7 +26,7 @@
             display: inline-block;
             white-space: nowrap;
             position: relative;
-            animation: ticker 15s linear infinite;
+            animation: ticker 18s linear infinite;
             font-weight: 600;
             font-size: 1.1rem;
             color: #212529;
@@ -36,6 +36,20 @@
             0%   { transform: translateX(100%); }
             100% { transform: translateX(-100%); }
         }
+
+        /* Cell highlight styles */
+        .highlight-green { background-color: #28a745 !important; color: white !important; } /* Highest Income */
+        .highlight-red { background-color: #dc3545 !important; color: white !important; }   /* Lowest Spending */
+        .highlight-blue { background-color: #007bff !important; color: white !important; }  /* Highest Spending */
+
+        /* Legend styling */
+        .legend-box {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            margin-right: 6px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="bg-light">
@@ -44,7 +58,9 @@
     <!-- ✅ Professional Banner -->
     <div class="author-banner text-center">
         <div class="scrolling-text">
-            Final Project – Customer Segmentation | By: <span class="text-primary">Osazuwa Omoregbe</span> | 🌍 Deployed on <strong>Render</strong> (AWS deployment attempt unsuccessful)
+            FINAL PROJECT – Customer Segmentation at LG Corporation | By: 
+            <span class="text-primary">Osazuwa Stanley Omoregbe</span> | 🌍 Deployed on 
+            <strong>Render</strong> (AWS deployment attempt unsuccessful)
         </div>
     </div>
 
@@ -89,6 +105,77 @@
     <div class="card shadow-sm">
         <div class="card-body">
             {{ cluster_summary | safe }}
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    const tables = document.querySelectorAll("table");
+                    tables.forEach(table => {
+                        table.classList.add("table", "table-striped", "table-bordered", "align-middle", "text-center");
+
+                        let rows = table.querySelectorAll("tbody tr");
+                        let maxIncome = -Infinity, minSpending = Infinity, maxSpending = -Infinity;
+                        let incomeIndex = -1, spendingIndex = -1;
+
+                        // Find column indexes
+                        table.querySelectorAll("thead th").forEach((th, i) => {
+                            if (th.innerText.includes("Annual_Income")) incomeIndex = i;
+                            if (th.innerText.includes("Spending_Score")) spendingIndex = i;
+                        });
+
+                        // Find max/min values
+                        rows.forEach(row => {
+                            let income = parseInt(row.cells[incomeIndex].innerText.replace(/,/g, ""));
+                            let spending = parseInt(row.cells[spendingIndex].innerText.replace(/,/g, ""));
+                            if (income > maxIncome) maxIncome = income;
+                            if (spending < minSpending) minSpending = spending;
+                            if (spending > maxSpending) maxSpending = spending;
+                        });
+
+                        // Apply highlights to specific cells
+                        rows.forEach(row => {
+                            let incomeCell = row.cells[incomeIndex];
+                            let spendingCell = row.cells[spendingIndex];
+                            let income = parseInt(incomeCell.innerText.replace(/,/g, ""));
+                            let spending = parseInt(spendingCell.innerText.replace(/,/g, ""));
+                            if (income === maxIncome) incomeCell.classList.add("highlight-green");
+                            if (spending === minSpending) spendingCell.classList.add("highlight-red");
+                            if (spending === maxSpending) spendingCell.classList.add("highlight-blue");
+                        });
+                    });
+                });
+            </script>
+
+            <!-- ✅ Legend -->
+            <div class="mt-3">
+                <p><span class="legend-box" style="background-color:#28a745;"></span> Highest Annual Income</p>
+                <p><span class="legend-box" style="background-color:#dc3545;"></span> Lowest Spending Score</p>
+                <p><span class="legend-box" style="background-color:#007bff;"></span> Highest Spending Score</p>
+            </div>
+
+            <!-- ✅ Insights Section -->
+            <div class="alert alert-info mt-4">
+                <h5>📌 Key Insights</h5>
+                <p>
+                    The cluster with the <strong>highest income</strong> (green) represents LG’s wealthiest customers, 
+                    who are prime candidates for premium product offerings.  
+                    The cluster with the <strong>lowest spending score</strong> (red) highlights customers who are 
+                    less engaged, suggesting a need for retention strategies.  
+                    Meanwhile, the cluster with the <strong>highest spending score</strong> (blue) identifies 
+                    LG’s most valuable and loyal customers, who should be prioritized for loyalty programs 
+                    and exclusive promotions.
+                </p>
+            </div>
+
+            <!-- ✅ Recommendations Section -->
+            <div class="alert alert-success mt-3">
+                <h5>💡 Strategic Recommendations</h5>
+                <ul class="mb-0">
+                    <li><strong>Premium Upsell:</strong> Target high-income customers with luxury products, extended warranties, and exclusive bundles.</li>
+                    <li><strong>Retention Campaigns:</strong> Re-engage low-spending clusters with personalized offers, discounts, and customer service outreach.</li>
+                    <li><strong>Loyalty Programs:</strong> Reward high-spending clusters with VIP memberships, early access to new products, and referral bonuses.</li>
+                    <li><strong>Data-Driven Marketing:</strong> Use segmentation insights to tailor campaigns by cluster, improving ROI and customer satisfaction.</li>
+                </ul>
+            </div>
+
             <a href="{{ url_for('download_summary') }}" class="btn btn-success mt-3">⬇️ Download Cluster Summary CSV</a>
         </div>
     </div>
