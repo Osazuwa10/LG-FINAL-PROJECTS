@@ -60,38 +60,19 @@ This project applies **data-driven customer segmentation** to LG Corporation’s
    cd LG-FINAL-PROJECTS
    ```
 
-````
-
-2. Create and activate a virtual environment:
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # On Mac/Linux
-   venv\Scripts\activate      # On Windows
-   ```
-
-3. Install dependencies:
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Run the Flask app:
-
-   ```bash
-   python app.py
-   ```
-
-5. Open in browser:
-   ```
-   http://127.0.0.1:5000
-   ```
-
----
-
-## 📂 Project Structure
-
 ```
+python -m venv venv
+source venv/bin/activate   # On Mac/Linux
+venv\Scripts\activate      # On Windows
+
+
+pip install -r requirements.txt
+
+python app.py
+
+http://127.0.0.1:5000
+
+
 LG-FINAL-PROJECTS/
 │
 ├── app.py
@@ -107,17 +88,12 @@ LG-FINAL-PROJECTS/
 ├── templates/
 │   └── index.html
 └── CustomerSegmentation.ipynb
+
+
+✨ Acknowledgements
+Nexford University – Business Analytics Program
+
+LG Corporation (case study dataset)
+
+Render for deployment hosting
 ```
-
----
-
-## ✨ Acknowledgements
-
-- Nexford University – Business Analytics Program
-- LG Corporation (case study dataset)
-- Render for deployment hosting
-
----
-
-
-````
