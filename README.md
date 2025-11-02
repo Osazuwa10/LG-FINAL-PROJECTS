@@ -13,45 +13,35 @@ This project applies **data-driven customer segmentation** to LG Corporation’s
 
 ---
 
-## 📌 Project Overview
-
-This project is the **Final Business Analytics Project** for Nexford University.  
-The objective is to analyze LG Corporation’s customer data to identify **distinct customer segments** and provide insights that can guide **targeted marketing strategies**.
-
-The project demonstrates:
-
-- Data preprocessing and exploratory data analysis (EDA)
-- Customer segmentation using **KMeans clustering**
-- Evaluation of cluster quality using **Elbow** and **Silhouette** methods
-- Deployment of an interactive **Flask web application** for visualization
-- Clear business implications for LG’s marketing strategy
-
----
-
 ## 📊 Results & Visualizations
 
 ### 1. Customer Segments
 
-![Customer Segments](plots/segments_plot.png)
+**Live (Render):**  
+![Customer Segments](https://lg-final-projects.onrender.com/plots/segments_plot.png)
 
-This scatter plot shows customer clusters based on **Annual Income** and **Spending Score**. Each color represents a distinct segment.
+**Static (Repo):**  
+![Customer Segments](plots/segments_plot.png)
 
 ---
 
 ### 2. Clustering Evaluation
 
-![Clustering Evaluation](plots/clustering_eval.png)
+**Live (Render):**  
+![Clustering Evaluation](https://lg-final-projects.onrender.com/plots/clustering_eval.png)
 
-- **Elbow Method**: Helps determine the optimal number of clusters.
-- **Silhouette Score**: Measures cluster quality and separation.
+**Static (Repo):**  
+![Clustering Evaluation](plots/clustering_eval.png)
 
 ---
 
 ### 3. Updated Clusters
 
-![Updated Clusters](plots/updated_clusters.png)
+**Live (Render):**  
+![Updated Clusters](https://lg-final-projects.onrender.com/plots/updated_clusters.png)
 
-This plot shows the segmentation after updating the number of clusters dynamically in the dashboard.
+**Static (Repo):**  
+![Updated Clusters](plots/updated_clusters.png)
 
 ---
 
@@ -62,60 +52,75 @@ This plot shows the segmentation after updating the number of clusters dynamical
 
 ---
 
-## ⚙️ Tech Stack
-
-- **Language:** Python 3.12+
-- **Framework:** Flask
-- **Libraries:**
-  - pandas
-  - numpy
-  - scikit-learn
-  - matplotlib
-  - seaborn
-- **Deployment:** Render (Gunicorn + Flask)
-
----
-
 ## ▶️ How to Run Locally
 
 1. Clone the repository:
    ```bash
    git clone https://github.com/Osazuwa10/LG-FINAL-PROJECTS.git
    cd LG-FINAL-PROJECTS
-   Create and activate a virtual environment:
    ```
 
-bash
-python -m venv venv
-source venv/bin/activate # On Mac/Linux
-venv\Scripts\activate # On Windows
-Install dependencies:
+````
 
-bash
-pip install -r requirements.txt
-Run the Flask app:
+2. Create and activate a virtual environment:
 
-bash
-python app.py
-Open in browser:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Mac/Linux
+   venv\Scripts\activate      # On Windows
+   ```
 
-Code
-http://127.0.0.1:5000
-📂 Project Structure
-Code
+3. Install dependencies:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Run the Flask app:
+
+   ```bash
+   python app.py
+   ```
+
+5. Open in browser:
+   ```
+   http://127.0.0.1:5000
+   ```
+
+---
+
+## 📂 Project Structure
+
+```
 LG-FINAL-PROJECTS/
 │
 ├── app.py
 ├── utils.py
 ├── requirements.txt
-├── procfile
 ├── runtime.txt
 ├── lg_customer_data.csv
 ├── plots/
-│ ├── segments_plot.png
-│ ├── clustering_eval.png
-│ ├── updated_clusters.png
-│ └── cluster_summary.csv
+│   ├── segments_plot.png
+│   ├── clustering_eval.png
+│   ├── updated_clusters.png
+│   └── cluster_summary.csv
 ├── templates/
-│ └── index.html
+│   └── index.html
 └── CustomerSegmentation.ipynb
+```
+
+---
+
+## ✨ Acknowledgements
+
+- Nexford University – Business Analytics Program
+- LG Corporation (case study dataset)
+- Render for deployment hosting
+
+---
+
+```
+
+---
+```
+````
