@@ -28,55 +28,11 @@ The project demonstrates:
 
 ---
 
-## 🎯 Business Problem
-
-LG Corporation recognized the need for a robust analytics model to:
-
-- Better understand customer behavior
-- Identify distinct customer groups
-- Tailor marketing strategies for each segment
-
-**Objective:**
-
-> To analyze customer data, identify meaningful clusters, and provide actionable insights for marketing optimization.
-
----
-
-## 🛠️ Methodology
-
-1. **Data Preparation**
-
-   - Dataset: `lg_customer_data.csv`
-   - Features used: `Age`, `Annual_Income`, `Spending_Score`
-   - Standardization applied using `StandardScaler`
-
-2. **Exploratory Data Analysis (EDA)**
-
-   - Distribution plots for Age, Income, and Spending
-   - Correlation heatmaps
-   - Scatter plots for feature relationships
-
-3. **Clustering**
-
-   - Algorithm: **KMeans**
-   - Optimal number of clusters determined using:
-     - Elbow Method
-     - Silhouette Score
-   - Final segmentation visualized in 2D scatter plots
-
-4. **Deployment**
-   - Flask app built with interactive dashboard
-   - Users can select number of clusters dynamically
-   - Cluster summary table generated and downloadable as CSV
-   - Deployed on **Render** (AWS attempt unsuccessful)
-
----
-
 ## 📊 Results & Visualizations
 
 ### 1. Customer Segments
 
-![Customer Segments](https://lg-final-projects.onrender.com/plots/segments_plot.png)
+![Customer Segments](plots/segments_plot.png)
 
 This scatter plot shows customer clusters based on **Annual Income** and **Spending Score**. Each color represents a distinct segment.
 
@@ -84,27 +40,25 @@ This scatter plot shows customer clusters based on **Annual Income** and **Spend
 
 ### 2. Clustering Evaluation
 
-![Clustering Evaluation](https://lg-final-projects.onrender.com/plots/clustering_eval.png)
+![Clustering Evaluation](plots/clustering_eval.png)
 
 - **Elbow Method**: Helps determine the optimal number of clusters.
 - **Silhouette Score**: Measures cluster quality and separation.
 
 ---
 
-### 3. Cluster Summary
+### 3. Updated Clusters
 
-![Cluster Summary](https://lg-final-projects.onrender.com/plots/cluster_summary.png)
+![Updated Clusters](plots/updated_clusters.png)
 
-- ✅ **Green** → Highest Income Cluster
-- 🔴 **Red** → Lowest Spending Cluster
-- 🔵 **Blue** → Highest Spending Cluster
+This plot shows the segmentation after updating the number of clusters dynamically in the dashboard.
 
 ---
 
 ## 🚀 Deployment
 
 - **Live App:** [Customer Segmentation Dashboard](https://lg-final-projects.onrender.com)
-- **GitHub Repository:** [GitHub Repo Link](https://github.com/yourusername/lg-customer-segmentation)
+- **GitHub Repository:** [LG-FINAL-PROJECTS](https://github.com/Osazuwa10/LG-FINAL-PROJECTS)
 
 ---
 
@@ -126,6 +80,42 @@ This scatter plot shows customer clusters based on **Annual Income** and **Spend
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/lg-customer-segmentation.git
-   cd lg-customer-segmentation
+   git clone https://github.com/Osazuwa10/LG-FINAL-PROJECTS.git
+   cd LG-FINAL-PROJECTS
+   Create and activate a virtual environment:
    ```
+
+bash
+python -m venv venv
+source venv/bin/activate # On Mac/Linux
+venv\Scripts\activate # On Windows
+Install dependencies:
+
+bash
+pip install -r requirements.txt
+Run the Flask app:
+
+bash
+python app.py
+Open in browser:
+
+Code
+http://127.0.0.1:5000
+📂 Project Structure
+Code
+LG-FINAL-PROJECTS/
+│
+├── app.py
+├── utils.py
+├── requirements.txt
+├── procfile
+├── runtime.txt
+├── lg_customer_data.csv
+├── plots/
+│ ├── segments_plot.png
+│ ├── clustering_eval.png
+│ ├── updated_clusters.png
+│ └── cluster_summary.csv
+├── templates/
+│ └── index.html
+└── CustomerSegmentation.ipynb
